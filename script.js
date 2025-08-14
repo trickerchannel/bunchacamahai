@@ -21,7 +21,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	event.target.appendChild(orderTypeInput);
 	// Kiểm tra nếu có ít nhất một món ăn được chọn
 	const quantities = {
-		pho: parseInt(document.getElementById('quantity-pho').value, 10) || 0
+		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncha: parseInt(document.getElementById('quantity-buncha').value, 10) || 0
 		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
@@ -45,7 +45,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	event.preventDefault(); // Dừng hành động gửi mặc định của biểu mẫu
 	// Lấy số lượng từng sản phẩm
 	const quantities = {
-		pho: parseInt(document.getElementById('quantity-pho').value, 10) || 0
+		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncha: parseInt(document.getElementById('quantity-buncha').value, 10) || 0
 		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
@@ -54,7 +54,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	, };
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
-		pho: 50
+		bunchaca: 50
 		, buncha: 40
 		, comtam: 45
 		, bunthem: 5
@@ -63,7 +63,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	, };
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
-		pho: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm Phở
+		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm bunchaca
 		buncha: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
 		comtam: "entry.183016488", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
@@ -499,3 +499,4 @@ document.getElementById('backToTop').addEventListener('click', function () {
 		, behavior: 'smooth'
 	});
 });
+
