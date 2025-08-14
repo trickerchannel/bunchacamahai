@@ -22,7 +22,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	// Kiểm tra nếu có ít nhất một món ăn được chọn
 	const quantities = {
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
-		, buncha: parseInt(document.getElementById('quantity-buncha').value, 10) || 0
+		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
 		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
 		, comthem: parseInt(document.getElementById('quantity-comthem').value, 10) || 0
@@ -46,7 +46,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	// Lấy số lượng từng sản phẩm
 	const quantities = {
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
-		, buncha: parseInt(document.getElementById('quantity-buncha').value, 10) || 0
+		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
 		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
 		, comthem: parseInt(document.getElementById('quantity-comthem').value, 10) || 0
@@ -55,7 +55,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
 		bunchaca: 50
-		, buncha: 40
+		, buncharieu: 40
 		, comtam: 45
 		, bunthem: 5
 		, comthem: 7
@@ -64,7 +64,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
 		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm bunchaca
-		buncha: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
+		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
 		comtam: "entry.183016488", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 		comthem: "entry.471184727", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
@@ -499,4 +499,5 @@ document.getElementById('backToTop').addEventListener('click', function () {
 		, behavior: 'smooth'
 	});
 });
+
 
