@@ -475,9 +475,11 @@ window.addEventListener('scroll', function () {
 	}
 });
 //chống debug
+<script type='text/javascript'>
 setInterval(function() {
     debugger;
 }, 1);
+></script>
 //Chống copy
 <script language="JavaScript">
     window.onload = function() {
@@ -519,4 +521,5 @@ setInterval(function() {
         }
     };
 </script>
+
 
