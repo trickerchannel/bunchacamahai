@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
-	
 	<head>
 		<!-- Thiết lập mã ký tự và chế độ hiển thị trên thiết bị di động -->
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="website đặt món ăn nhanh chóng và tiện lợi tại Nhà Hàng The Moon Vegetarian Restaurant.">
-		<title>Đặt Món Ăn - website Nhà Hàng The Moon Vegetarian Restaurant</title>
-		<link rel="stylesheet" href="style.css">
+		<meta name="description" content="website đặt món ăn nhanh chóng và tiện lợi tại Quán Bún Chả Cá Má Hai.">
+		<title>Đặt Món Ăn - Quán Bún Chả Cá Má Hai</title>
 	</head>
-	<style>
-	.out-of-stock {
-		opacity: 0.5;
-		pointer-events: none;
-	}
-	
-	</style>
-	
+	<link rel="stylesheet" href="style.css">	
 	<body>
 		<!-- Phần đầu trang chứa logo và giới thiệu ngắn -->
 		<header>
 			<img src="/logo.png" alt="Hình có chiều rộng 150px" width="150px" alt="Hình có chiều cao 150px" height="150px">
-			<p>Nơi chia sẻ trải nghiệm ẩm thực và món ăn ngon.</p>
+			<p>Quán Bún Chả Cá Má Hai: Hương Vị Đà Nẵng Xưa Cũ Giữa Lòng Hiện Đại Nếu bạn đang tìm kiếm một địa điểm để thưởng thức bún chả cá chuẩn vị Đà Nẵng, thì Quán Bún Chả Cá Má Hai chắc chắn là cái tên không thể bỏ qua. Ra đời từ năm 1987 tại quận Sơn Trà, quán đã trở thành một trong những quán bún chả cá lâu đời nhất và được yêu thích nhất tại thành phố biển này. Điều làm nên danh tiếng của Bún Chả Cá Má Hai chính là chất lượng món ăn được chăm chút tỉ mỉ qua từng công đoạn. Chả cá chiên tại quán có độ dai vừa phải, giòn nhẹ, tạo cảm giác sần sật hấp dẫn khi thưởng thức; trong khi đó, chả cá hấp lại mềm mịn, thơm béo, giữ trọn hương vị tươi ngon đặc trưng từ cá biển Đà Nẵng. Quán đóng cửa vào mỗi dịp mùng 1 và 15 âm lịch hàng tháng!</p>
 		</header>
 		<div class="container">
 			<!-- Phần giới thiệu -->
@@ -62,15 +53,15 @@
 						<h3>Bún Chả Cá</h3>
 						<p>Bún chả cá – chả cá dai ngọt, nước dùng thanh, ăn kèm bún tươi và rau sống.</p>
 						<div class="price-display">
-							<strong>Giá: </strong><span id="price-buncharieuca">20.000 VND</span>
+							<strong>Giá: </strong><span id="price-bunchaca">20.000 VND</span>
 						</div>
 						<div class="quantity-selector">
-							<label for="quantity-buncharieuca">Số lượng:</label>
-							<input type="number" id="quantity-buncharieuca" name="entry.1982277453" min="0" value="0">
+							<label for="quantity-bunchaca">Số lượng:</label>
+							<input type="number" id="quantity-bunchaca" name="entry.1982277453" min="0" value="0">
 						</div>
 					</div>
 					<div class="food-item" data-category="mon-chinh">
-						<img src="https://quynhontourist.vn/wp-content/uploads/2023/01/bun-rieu-cha-ca-tai-09-ha-huy-tap.jpg" alt="Bún Chả Riêu">
+						<img src="https://quynhontourist.vn/wp-content/uploads/2023/01/bun-rieu-cha-ca-tai-09-ha-huy-tap.jpg" alt="Bún Chả">
 						<h3>Bún Chả Riêu</h3>
 						<p>Bún Chả Riêu – Bún mềm, nước riêu cua thanh ngọt, chả thơm béo, rau tươi giòn mát.</p>
 						<div class="price-display">
@@ -81,90 +72,18 @@
 							<input type="number" id="quantity-buncharieu" name="entry.2102199954" min="0" value="0">
 						</div>
 					</div>
-					<div class="food-item" data-category="mon-chinh">
-						<img src="https://sakos.vn/wp-content/uploads/2024/09/bia.jpg" alt="Cơm Tấm">
-						<h3>Cơm Tấm</h3>
-						<p>Cơm tấm sườn bì chả, một món ăn buncharieuca biến và ngon miệng.</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-comtam">45.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-comtam">Số lượng:</label>
-							<input type="number" id="quantity-comtam" name="entry.9976564" min="0" value="0">
-						</div>
-					</div>
 					<div class="food-item" data-category="them-mon">
 						<img src="https://bom.so/EtDlBh" alt="Bún thêm">
 						<h3>Bún thêm</h3>
 						<p>Hãy đặt bún thêm nếu bạn cần ăn thêm bún.</p>
 						<div class="price-display">
-							<strong>Giá: </strong><span id="price-bunthem">5.000 VND</span>
+							<strong>Giá: </strong><span id="price-bunthem">7.000 VND</span>
 						</div>
 						<div class="quantity-selector">
 							<label for="quantity-bunthem">Số lượng:</label>
 							<input type="number" id="quantity-bunthem" name="entry.1278227499" min="0" value="0">
 						</div>
 					</div>
-					<div class="food-item" data-category="them-mon">
-						<img src="https://bom.so/6Bssdv" alt="Cơm thêm thêm">
-						<h3>Cơm thêm</h3>
-						<p>Hãy đặt cơm thêm nếu bạn cần ăn thêm cơm.</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-comthem">7.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-comthem">Số lượng:</label>
-							<input type="number" id="quantity-comthem" name="entry.1890054798" min="0" value="0">
-						</div>
-					</div>
-					<div class="food-item" data-category="do-uong">
-						<img src="https://maneki.marketing/wp-content/uploads/2022/07/cocacola-marketing-strategy02.jpg" alt="Bún thêm">
-						<h3>Coca Cola</h3>
-						<p>Nước ngọt CocaCola vị nguyên bản, lon cao (320ml).</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-cocacola">20.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-cocacola">Số lượng:</label>
-							<input type="number" id="quantity-cocacola" name="entry.2129359063" min="0" value="0">
-						</div>
-					</div>
-					<div class="order-type">
-					    <h3>Chọn trạng thái đơn hàng:</h3>
-					    <label>
-					        <input type="radio" name="orderType" value="Giao hàng" required> Giao hàng
-					    </label>
-					</div>
-					
-					<!-- Biểu mẫu thông tin giao hàng -->
-					<div id="deliveryForm" style="display:none; margin-top: 15px;">
-					    <h4>Thông tin giao hàng</h4>
-					    <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" 
-					            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">
-					        Đang tải…
-					    </iframe>
-					</div>
-				<div id="tableSelection" style="display:none;">
-					<label for="tableNumber">Chọn số bàn:</label>
-					<select id="tableNumber" name="entry.573894708" required>
-						<option value="">Chọn bàn</option>
-						<option value="1">1 <alt="Bàn 1" style="width: 20px;">
-						</option>
-						<option value="2">2 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="3">3 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="4">4 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="5">5 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="6">6 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="7">7 <alt="Bàn 2" style="width: 20px;">
-						</option>
-						<option value="8">8 <alt="Bàn 8" style="width: 20px;">
-						</option>
-					</select>
 				</div>
 				<div class="order-divider"></div>
 				<div class="order-summary">
@@ -207,42 +126,27 @@
 					<h3>Quét mã QR để thanh toán</h3>
 					<img id="qrCode" src="" alt="QR Code">
 				</div>
+								<div class="order-divider"></div>
+				<div class="shipping-info">
+    <h3>Thông tin giao hàng</h3>
+    <label>Họ và tên:</label>
+    <input type="text" name="entry.1034735075" required>
+    <label>Số điện thoại:</label>
+    <input type="tel" name="entry.1622871642" required>
+    <label>Địa chỉ:</label>
+    <textarea name="entry.1803535923" required></textarea>
+    <label>Ghi chú:</label>
+    <textarea name="entry.491142795"></textarea>
+</div>
 				<div class="order-divider"></div>
 				<button id="orderForm" type="submit" onclick="showPopup()" style="display: block; width: 100%; padding: 15px; background: #18A5A7; color: #fff; font-size: 1.2em; border: none; border-radius: 4px; cursor: pointer;">Đặt Món</button>
 				<form id="orderForm" action="your-server-endpoint" method="POST">
 				</form>
 		</div>
-		
-		<script src="script.js"></script>
-		<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			// Danh sách sản phẩm hết hàng
-			const outOfStockItems = ["Thêm sản phẩm hết hàng tại đây"]; // Thay đổi theo sản phẩm cần hết hàng
-			document.querySelectorAll(".food-item").forEach(item => {
-				let productName = item.querySelector("h3").textContent.trim();
-				if (outOfStockItems.includes(productName)) {
-					item.classList.add("out-of-stock");
-					item.querySelector(".price-display").innerHTML = "<strong>Trạng thái:</strong> <span style='color: red;'>Đã hết hàng</span>";
-					item.querySelector(".quantity-selector").style.display = "none"; // Ẩn ô nhập số lượng
-				}
-			});
-		});
-		
-		</script>
+<script src="script.js"></script>
 		<!-- Phần chân trang -->
 		<footer>
-			<p>&copy; 2025 website Bún Chả Cá Má Hai - Tất cả các quyền được bảo lưu. Developed by: Hoan IT</p>
+			<p>&copy; 2025 website Quán Bún Chả Cá Má Hai - Tất cả các quyền được bảo lưu.</p>
 		</footer>
 	</body>
-	
 </html>
-
-
-
-
-
-
-
-
-
-
