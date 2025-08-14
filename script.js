@@ -6,6 +6,7 @@
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
+		, chaca: parseInt(document.getElementById('quantity-chaca').value, 10) || 0
 	, };
 	let hasValidProduct = false;
 	Object.values(quantities).forEach(quantity => {
@@ -27,18 +28,21 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
+		, chaca: parseInt(document.getElementById('quantity-chaca').value, 10) || 0
 	, };
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
-		bunchaca: 20
-		, buncharieu: 25
-		, bunthem: 7
+		bunchaca: 25	 // Giá của Bún Chả Cá
+		, buncharieu: 30 // Giá của Bún Chả Riêu
+		, bunthem: 5	 // Giá của Bún thêm
+		, chaca: 20		// Giá của Chả Cá Riêng
 	, };
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
 		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả Cá
 		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
-		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
+		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm bún thêm
+		chaca: "entry.1820904143", // Thay bằng ID của Google Forms cho sản phẩm Chả cá riêng
 	};
 	let hasValidProduct = false; // Biến kiểm tra có ít nhất một sản phẩm hợp lệ
 	Object.keys(quantities).forEach(product => {
