@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+	
+	<head>
+		<!-- Thiết lập mã ký tự và chế độ hiển thị trên thiết bị di động -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="website đặt món ăn nhanh chóng và tiện lợi tại Nhà Hàng The Moon Vegetarian Restaurant.">
+		<title>Đặt Món Ăn - website Nhà Hàng The Moon Vegetarian Restaurant</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<style>
+	.out-of-stock {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	
+	</style>
+	
+	<body>
+		<!-- Phần đầu trang chứa logo và giới thiệu ngắn -->
+		<header>
+			<img src="/img/logo.png" alt="Hình có chiều rộng 150px" width="150px" alt="Hình có chiều cao 150px" height="150px">
+			<p>Nơi chia sẻ trải nghiệm ẩm thực và món ăn ngon.</p>
+		</header>
+		<div class="container">
+			<!-- Phần giới thiệu -->
+			<div class="intro">
+				<p>Chào mừng bạn đến với website Nhà Hàng The Moon Vegetarian Restaurant! Khám phá những món ăn đặc sắc và đặt món ngay để tận hưởng hương vị tuyệt vời.</p>
+			</div>
+			<!-- Thanh tìm kiếm món ăn -->
+			<div class="search-bar">
+				<center><input type="text" id="foodSearch" placeholder="Tìm kiếm món ăn tại đây..." style="width: 70%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px;"></center>
+			</div>
+			<!-- Nút Back to Top -->
+			<button id="backToTop">↑</button>
+			<!-- Danh mục món ăn -->
+			<div class="category-container">
+				<div class="category-item" data-category="all">
+					<img src="https://cdn4.iconfinder.com/data/icons/selection-cursors-1/24/Scroll-All_Direction_1-256.png" alt="Tất cả">
+					<span>Tất cả</span>
+				</div>
+				<div class="category-item" data-category="mon-chinh">
+					<img src="https://cdn2.iconfinder.com/data/icons/restaurant-outline-3/64/Course-food-main-plate-restaurant-512.png" alt="Món chính">
+					<span>Món Chính</span>
+				</div>
+				<div class="category-item" data-category="them-mon">
+					<img src="https://cdn3.iconfinder.com/data/icons/food-delivery-203/512/-_dish_food_cover_cloche_add_create_plus-512.png" alt="Thêm Món">
+					<span>Thêm Món</span>
+				</div>
+				<div class="category-item" data-category="do-uong">
+					<img src="https://cdn3.iconfinder.com/data/icons/coffee-related/64/coffee_paper_drink_cup_icon-512.png" alt="Đồ Uống">
+					<span>Đồ Uống</span>
+				</div>
+			</div>
+			
+			<form id="orderForm" action="https://docs.google.com/forms/d/e/1FAIpQLSda1imghgrIuG5Ugq9uVXSaEsXUTJVysc8e0GWR1He2j2fN9A/formResponse" method="POST">
+				<!-- Danh sách món ăn -->
+				<div class="food-grid">
+					<div class="food-item" data-category="mon-chinh">
+						<img src="https://static.vinwonders.com/2022/11/pho_da_nang.jpg" alt="Phở">
+						<h3>Phở</h3>
+						<p>Món phở truyền thống Việt Nam, với nước dùng thơm ngon và thịt bò tươi.</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-pho">50.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-pho">Số lượng:</label>
+							<input type="number" id="quantity-pho" name="entry.1982277453" min="0" value="0">
+						</div>
+					</div>
+					<div class="food-item" data-category="mon-chinh">
+						<img src="https://i-giadinh.vnecdn.net/2023/04/16/Buoc-11-Thanh-pham-11-7068-1681636164.jpg" alt="Bún Chả">
+						<h3>Bún Chả</h3>
+						<p>Thịt nướng than thơm lừng, kết hợp với bún tươi và nước mắm chua ngọt.</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-buncha">40.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-buncha">Số lượng:</label>
+							<input type="number" id="quantity-buncha" name="entry.2102199954" min="0" value="0">
+						</div>
+					</div>
+					<div class="food-item" data-category="mon-chinh">
+						<img src="https://sakos.vn/wp-content/uploads/2024/09/bia.jpg" alt="Cơm Tấm">
+						<h3>Cơm Tấm</h3>
+						<p>Cơm tấm sườn bì chả, một món ăn phổ biến và ngon miệng.</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-comtam">45.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-comtam">Số lượng:</label>
+							<input type="number" id="quantity-comtam" name="entry.9976564" min="0" value="0">
+						</div>
+					</div>
+					<div class="food-item" data-category="them-mon">
+						<img src="https://bom.so/EtDlBh" alt="Bún thêm">
+						<h3>Bún thêm</h3>
+						<p>Hãy đặt bún thêm nếu bạn cần ăn thêm bún.</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-bunthem">5.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-bunthem">Số lượng:</label>
+							<input type="number" id="quantity-bunthem" name="entry.1278227499" min="0" value="0">
+						</div>
+					</div>
+					<div class="food-item" data-category="them-mon">
+						<img src="https://bom.so/6Bssdv" alt="Cơm thêm thêm">
+						<h3>Cơm thêm</h3>
+						<p>Hãy đặt cơm thêm nếu bạn cần ăn thêm cơm.</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-comthem">7.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-comthem">Số lượng:</label>
+							<input type="number" id="quantity-comthem" name="entry.1890054798" min="0" value="0">
+						</div>
+					</div>
+					<div class="food-item" data-category="do-uong">
+						<img src="https://maneki.marketing/wp-content/uploads/2022/07/cocacola-marketing-strategy02.jpg" alt="Bún thêm">
+						<h3>Coca Cola</h3>
+						<p>Nước ngọt CocaCola vị nguyên bản, lon cao (320ml).</p>
+						<div class="price-display">
+							<strong>Giá: </strong><span id="price-cocacola">20.000 VND</span>
+						</div>
+						<div class="quantity-selector">
+							<label for="quantity-cocacola">Số lượng:</label>
+							<input type="number" id="quantity-cocacola" name="entry.2129359063" min="0" value="0">
+						</div>
+					</div>
+					<div class="order-type">
+						<h3>Chọn trạng thái đơn hàng:</h3>
+						<label>
+							<input type="radio" name="orderType" value="Mang đi" required> Mang đi
+						</label>
+						<label>
+							<input type="radio" name="orderType" value="Ngồi tại bàn" required> Ngồi tại bàn
+						</label>
+					</div>
+				</div>
+				<div id="tableSelection" style="display:none;">
+					<label for="tableNumber">Chọn số bàn:</label>
+					<select id="tableNumber" name="entry.573894708" required>
+						<option value="">Chọn bàn</option>
+						<option value="1">1 <alt="Bàn 1" style="width: 20px;">
+						</option>
+						<option value="2">2 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="3">3 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="4">4 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="5">5 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="6">6 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="7">7 <alt="Bàn 2" style="width: 20px;">
+						</option>
+						<option value="8">8 <alt="Bàn 8" style="width: 20px;">
+						</option>
+					</select>
+				</div>
+				<div class="order-divider"></div>
+				<div class="order-summary">
+					<h2>
+						<i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>
+						Giỏ hàng của bạn
+					</h2>
+					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+					<table id="orderTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+						<thead>
+							<tr style="background-color: #f2f2f2;">
+								<th style="border: 1px solid #ddd; padding: 10px;">Sản phẩm</th>
+								<th style="border: 1px solid #ddd; padding: 10px;">Số lượng</th>
+								<th style="border: 1px solid #ddd; padding: 10px;">Giá (VND)</th>
+								<th style="border: 1px solid #ddd; padding: 10px;">Thành tiền (VND)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Các dòng sản phẩm sẽ được thêm tự động -->
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="3" style="text-align: right; padding: 10px; font-weight: bold;">Tổng cộng:</td>
+								<td id="totalPrice" style="text-align: center; padding: 10px; font-weight: bold;">0 VND</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="order-divider"></div>
+				<div class="order-type">
+					<h3>Chọn phương thức thanh toán:</h3>
+					<label>
+						<input type="radio" name="paymentMethod" value="Tiền mặt" required> Tiền mặt
+					</label>
+					<label>
+						<input type="radio" name="paymentMethod" value="Chuyển khoản" required> Chuyển khoản
+					</label>
+				</div>
+				<div class="qr-container" id="qrContainer">
+					<h3>Quét mã QR để thanh toán</h3>
+					<img id="qrCode" src="" alt="QR Code">
+				</div>
+				<div class="order-divider"></div>
+				<button id="orderForm" type="submit" onclick="showPopup()" style="display: block; width: 100%; padding: 15px; background: #18A5A7; color: #fff; font-size: 1.2em; border: none; border-radius: 4px; cursor: pointer;">Đặt Món</button>
+				<form id="orderForm" action="your-server-endpoint" method="POST">
+				</form>
+		</div>
+		
+		<script src="script.js"></script>
+		<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Danh sách sản phẩm hết hàng
+			const outOfStockItems = ["Thêm sản phẩm hết hàng tại đây"]; // Thay đổi theo sản phẩm cần hết hàng
+			document.querySelectorAll(".food-item").forEach(item => {
+				let productName = item.querySelector("h3").textContent.trim();
+				if (outOfStockItems.includes(productName)) {
+					item.classList.add("out-of-stock");
+					item.querySelector(".price-display").innerHTML = "<strong>Trạng thái:</strong> <span style='color: red;'>Đã hết hàng</span>";
+					item.querySelector(".quantity-selector").style.display = "none"; // Ẩn ô nhập số lượng
+				}
+			});
+		});
+		
+		</script>
+		<!-- Phần chân trang -->
+		<footer>
+			<p>&copy; 2025 website Nhà Hàng The Moon Vegetarian Restaurant - Tất cả các quyền được bảo lưu.</p>
+		</footer>
+	</body>
+	
+</html>
