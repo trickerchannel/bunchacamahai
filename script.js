@@ -1,5 +1,5 @@
 // Xử lý sự kiện gửi form
-			document.getElementById('orderForm').addEventListener('submit', function (event) {
+document.getElementById('orderForm').addEventListener('submit', function (event) {
 	event.preventDefault(); // Ngăn gửi form mặc định
 	// Kiểm tra nếu có ít nhất một món ăn được chọn
 	const quantities = {
@@ -32,10 +32,10 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	, };
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
-		bunchaca: 25	 // Giá của Bún Chả Cá
+		bunchaca: 25 // Giá của Bún Chả Cá
 		, buncharieu: 30 // Giá của Bún Chả Riêu
-		, bunthem: 5	 // Giá của Bún thêm
-		, chaca: 20		// Giá của Chả Cá Riêng
+		, bunthem: 5 // Giá của Bún thêm
+		, chaca: 20 // Giá của Chả Cá Riêng
 	, };
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
@@ -203,7 +203,6 @@ document.querySelectorAll('input[name="orderType"]').forEach(radio => {
 		}
 	});
 });
-
 
 function updateQRCode(totalAmount) {
 	const qrContainer = document.getElementById('qrContainer');
@@ -445,38 +444,35 @@ document.getElementById('backToTop').addEventListener('click', function () {
 		top: 0
 		, behavior: 'smooth'
 	});
-// Kiểm tra thông tin giao hàng trước khi gửi form
-document.getElementById('orderForm').addEventListener('submit', function (event) {
-    // Lấy giá trị các trường
-    const name = document.querySelector('input[name="entry.123456789"]').value.trim();
-    const phone = document.querySelector('input[name="entry.987654321"]').value.trim();
-    const address = document.querySelector('textarea[name="entry.111213141"]').value.trim();
-
-    // Kiểm tra từng trường
-    if (!name || !phone || !address) {
-        alert("Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng.");
-        event.preventDefault(); // Ngăn gửi form
-        return;
-    }
-
-    // Kiểm tra số điện thoại hợp lệ (10-11 số)
-    const phonePattern = /^[0-9]{10,11}$/;
-    if (!phonePattern.test(phone)) {
-        alert("Vui lòng nhập số điện thoại hợp lệ (10-11 chữ số).");
-        event.preventDefault();
-        return;
-    }
-});
-	});
-
-	// Hiển thị nút Back to Top khi cuộn xuống
-	window.addEventListener('scroll', function () {
-		const backToTopButton = document.getElementById('backToTop');
-		if (window.scrollY > 300) {
-			backToTopButton.style.display = 'block';
-		} else {
-			backToTopButton.style.display = 'none';
+	// Kiểm tra thông tin giao hàng trước khi gửi form
+	document.getElementById('orderForm').addEventListener('submit', function (event) {
+		// Lấy giá trị các trường
+		const name = document.querySelector('input[name="entry.123456789"]').value.trim();
+		const phone = document.querySelector('input[name="entry.987654321"]').value.trim();
+		const address = document.querySelector('textarea[name="entry.111213141"]').value.trim();
+		// Kiểm tra từng trường
+		if (!name || !phone || !address) {
+			alert("Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng.");
+			event.preventDefault(); // Ngăn gửi form
+			return;
 		}
+		// Kiểm tra số điện thoại hợp lệ (10-11 số)
+		const phonePattern = /^[0-9]{10,11}$/;
+		if (!phonePattern.test(phone)) {
+			alert("Vui lòng nhập số điện thoại hợp lệ (10-11 chữ số).");
+			event.preventDefault();
+			return;
+		}
+	});
+});
+// Hiển thị nút Back to Top khi cuộn xuống
+window.addEventListener('scroll', function () {
+	const backToTopButton = document.getElementById('backToTop');
+	if (window.scrollY > 300) {
+		backToTopButton.style.display = 'block';
+	} else {
+		backToTopButton.style.display = 'none';
+	}
 });
 //chống debug
 <script type='text/javascript'>
@@ -645,4 +641,3 @@ if (document.layers) {
     document.oncontextmenu = defeatIE;
 }
 document.oncontextmenu = new Function("return false")
-
