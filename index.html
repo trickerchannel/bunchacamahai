@@ -130,15 +130,20 @@
 						</div>
 					</div>
 					<div class="order-type">
-						<h3>Chọn trạng thái đơn hàng:</h3>
-						<label>
-							<input type="radio" name="orderType" value="Mang đi" required> Mang đi
-						</label>
-						<label>
-							<input type="radio" name="orderType" value="Ngồi tại bàn" required> Ngồi tại bàn
-						</label>
+					    <h3>Chọn trạng thái đơn hàng:</h3>
+					    <label>
+					        <input type="radio" name="orderType" value="Giao hàng" required> Giao hàng
+					    </label>
 					</div>
-				</div>
+					
+					<!-- Biểu mẫu thông tin giao hàng -->
+					<div id="deliveryForm" style="display:none; margin-top: 15px;">
+					    <h4>Thông tin giao hàng</h4>
+					    <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" 
+					            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">
+					        Đang tải…
+					    </iframe>
+					</div>
 				<div id="tableSelection" style="display:none;">
 					<label for="tableNumber">Chọn số bàn:</label>
 					<select id="tableNumber" name="entry.573894708" required>
@@ -231,6 +236,7 @@
 	</body>
 	
 </html>
+
 
 
 
