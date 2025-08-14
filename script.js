@@ -1,32 +1,11 @@
-document.getElementById('orderForm').addEventListener('submit', function (event) {
+// Xử lý sự kiện gửi form
+			document.getElementById('orderForm').addEventListener('submit', function (event) {
 	event.preventDefault(); // Ngăn gửi form mặc định
-	// Lấy trạng thái đơn hàng từ các nút radio
-	const orderTypeRadios = document.getElementsByName('orderType');
-	let orderType = '';
-	for (const radio of orderTypeRadios) {
-		if (radio.checked) {
-			orderType = radio.value;
-			break;
-		}
-	}
-	if (!orderType) {
-		alert("Vui lòng chọn trạng thái đơn hàng.");
-		return; // Dừng gửi form nếu chưa chọn trạng thái
-	}
-	// Tạo input ẩn để gửi trạng thái đơn hàng
-	const orderTypeInput = document.createElement('input');
-	orderTypeInput.type = 'hidden';
-	orderTypeInput.name = 'entry.1747903740'; // Thay bằng cột Google Forms tương ứng
-	orderTypeInput.value = orderType;
-	event.target.appendChild(orderTypeInput);
 	// Kiểm tra nếu có ít nhất một món ăn được chọn
 	const quantities = {
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
-		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
-		, comthem: parseInt(document.getElementById('quantity-comthem').value, 10) || 0
-		, cocacola: parseInt(document.getElementById('quantity-cocacola').value, 10) || 0
 	, };
 	let hasValidProduct = false;
 	Object.values(quantities).forEach(quantity => {
@@ -47,28 +26,19 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	const quantities = {
 		bunchaca: parseInt(document.getElementById('quantity-bunchaca').value, 10) || 0
 		, buncharieu: parseInt(document.getElementById('quantity-buncharieu').value, 10) || 0
-		, comtam: parseInt(document.getElementById('quantity-comtam').value, 10) || 0
 		, bunthem: parseInt(document.getElementById('quantity-bunthem').value, 10) || 0
-		, comthem: parseInt(document.getElementById('quantity-comthem').value, 10) || 0
-		, cocacola: parseInt(document.getElementById('quantity-cocacola').value, 10) || 0
 	, };
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
 		bunchaca: 20
 		, buncharieu: 25
-		, comtam: 45
-		, bunthem: 5
-		, comthem: 7
-		, cocacola: 20
+		, bunthem: 7
 	, };
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
-		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm bunchaca
-		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả Riêu
-		comtam: "entry.183016488", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
+		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả Cá
+		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
 		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
-		comthem: "entry.471184727", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
-		cocacola: "entry.299783168", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 	};
 	let hasValidProduct = false; // Biến kiểm tra có ít nhất một sản phẩm hợp lệ
 	Object.keys(quantities).forEach(product => {
@@ -229,14 +199,7 @@ document.querySelectorAll('input[name="orderType"]').forEach(radio => {
 		}
 	});
 });
-document.getElementById('orderForm').addEventListener('submit', function (event) {
-	const orderType = document.querySelector('input[name="orderType"]:checked').value;
-	if (orderType === "Ngồi tại bàn" && !document.getElementById('tableNumber').value) {
-		alert("Vui lòng chọn số bàn trước khi đặt món!");
-		event.preventDefault();
-		return;
-	}
-});
+
 
 function updateQRCode(totalAmount) {
 	const qrContainer = document.getElementById('qrContainer');
@@ -457,32 +420,12 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 		alert("Vui lòng chọn ít nhất một món ăn.");
 		return;
 	}
-	// Lấy trạng thái đơn hàng
-	const orderTypeRadios = document.getElementsByName('orderType');
-	let orderType = '';
-	for (const radio of orderTypeRadios) {
-		if (radio.checked) {
-			orderType = radio.value;
-			break;
-		}
-	}
-	// Nếu chọn "Ngồi tại bàn", thêm thông tin số bàn
-	let tableNumber = '';
-	if (orderType === "Ngồi tại bàn") {
-		tableNumber = document.getElementById('tableNumber').value;
-		if (!tableNumber) {
-			alert("Vui lòng chọn số bàn.");
-			return;
-		}
-		orderType += ` (Bàn ${tableNumber})`;
-	}
 	// Tạo đối tượng đơn hàng
 	const order = {
 		id: orderId
 		, products
 		, totalQuantity
 		, totalPrice
-		, status: orderType
 	};
 	// Lưu đơn hàng vào LocalStorage
 	const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -498,7 +441,36 @@ document.getElementById('backToTop').addEventListener('click', function () {
 		top: 0
 		, behavior: 'smooth'
 	});
+// Kiểm tra thông tin giao hàng trước khi gửi form
+document.getElementById('orderForm').addEventListener('submit', function (event) {
+    // Lấy giá trị các trường
+    const name = document.querySelector('input[name="entry.123456789"]').value.trim();
+    const phone = document.querySelector('input[name="entry.987654321"]').value.trim();
+    const address = document.querySelector('textarea[name="entry.111213141"]').value.trim();
+
+    // Kiểm tra từng trường
+    if (!name || !phone || !address) {
+        alert("Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng.");
+        event.preventDefault(); // Ngăn gửi form
+        return;
+    }
+
+    // Kiểm tra số điện thoại hợp lệ (10-11 số)
+    const phonePattern = /^[0-9]{10,11}$/;
+    if (!phonePattern.test(phone)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (10-11 chữ số).");
+        event.preventDefault();
+        return;
+    }
 });
+	});
 
-
-
+	// Hiển thị nút Back to Top khi cuộn xuống
+	window.addEventListener('scroll', function () {
+		const backToTopButton = document.getElementById('backToTop');
+		if (window.scrollY > 300) {
+			backToTopButton.style.display = 'block';
+		} else {
+			backToTopButton.style.display = 'none';
+		}
+});
