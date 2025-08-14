@@ -54,8 +54,8 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	, };
 	// Giá mặc định cho từng sản phẩm
 	const prices = {
-		bunchaca: 50
-		, buncharieu: 40
+		bunchaca: 20
+		, buncharieu: 25
 		, comtam: 45
 		, bunthem: 5
 		, comthem: 7
@@ -64,7 +64,7 @@ document.getElementById('orderForm').addEventListener('submit', function (event)
 	// Gắn giá và cột ID cho từng sản phẩm
 	const priceInputs = {
 		bunchaca: "entry.864703962", // Thay bằng ID của Google Forms cho sản phẩm bunchaca
-		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả
+		buncharieu: "entry.168917830", // Thay bằng ID của Google Forms cho sản phẩm Bún Chả Riêu
 		comtam: "entry.183016488", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 		bunthem: "entry.2080936758", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
 		comthem: "entry.471184727", // Thay bằng ID của Google Forms cho sản phẩm Cơm Tấm
@@ -499,5 +499,6 @@ document.getElementById('backToTop').addEventListener('click', function () {
 		, behavior: 'smooth'
 	});
 });
+
 
 
