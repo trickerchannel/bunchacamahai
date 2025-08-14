@@ -604,21 +604,21 @@ shortcut = {
         }
     }
 }, shortcut.add("Ctrl+U", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("F12", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+P", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+Shift+I", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+Shift+J", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+S", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+Shift+C", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 }), shortcut.add("Ctrl+A", function() {
-    top.location.href = "https://trickerchannelvn.blogspot.com/"
+    top.location.href = "/"
 });
 var message = "NoRightClicking";
 
@@ -645,3 +645,4 @@ if (document.layers) {
     document.oncontextmenu = defeatIE;
 }
 document.oncontextmenu = new Function("return false")
+
