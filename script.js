@@ -478,3 +478,16 @@ window.addEventListener('scroll', function () {
 setInterval(function() {
     debugger;
 }, 1);
+//Chống copy
+type=”text/JavaScript”>
+function killCopy(e){
+return false
+}
+function reEnable(){
+return true
+}
+document.onselectstart=new Function (“return false”)
+if (window.sidebar){
+document.onmousedown=killCopy
+document.onclick=reEnable
+}
