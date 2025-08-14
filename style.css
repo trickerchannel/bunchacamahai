@@ -1,3 +1,52 @@
+/* Thông tin giao hàng */
+.shipping-info {
+    background: #ffffff;
+    border: 2px solid #18A5A7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.shipping-info h3 {
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    color: #18A5A7;
+    text-align: center;
+}
+
+.shipping-info label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.shipping-info input,
+.shipping-info textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.shipping-info input:focus,
+.shipping-info textarea:focus {
+    border-color: #18A5A7;
+    box-shadow: 0 0 6px rgba(24,165,167,0.4);
+    outline: none;
+    background-color: #fff;
+}
+
+.shipping-info textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
 /* Thiết lập kiểu dáng chung cho trang web */
 body {
 	font-family: 'Arial', sans-serif;
@@ -212,20 +261,6 @@ footer {
 	background-color: #218838;
 }
 
-.order-type {
-	margin: 20px 0;
-	font-size: 1em;
-}
-
-.order-type label {
-	margin-right: 20px;
-	cursor: pointer;
-}
-
-.order-type input[type="radio"] {
-	margin-right: 5px;
-}
-
 .category-container {
 	display: flex;
 	gap: 15px;
@@ -270,19 +305,6 @@ footer {
 .search-bar input {
 	font-size: 1em;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#tableSelection {
-	margin: 20px 0;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
-
-#tableSelection label {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #18A5A7;
 }
 
 #tableNumber {
