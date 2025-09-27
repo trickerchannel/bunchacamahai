@@ -1,171 +1,189 @@
 <!DOCTYPE html>
 <html lang="vi">
-	<head>
-		<!-- Thiết lập mã ký tự và chế độ hiển thị trên thiết bị di động -->
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="website đặt món ăn nhanh chóng và tiện lợi tại Nhà Hàng The Moon Vegetarian Restaurant.">
-		<title>Đặt Món Ăn - Quán Bún Chả Cá Má Hai</title>
-	</head>
-	<link rel="stylesheet" href="style.css">	
-	<body>
-		<!-- Phần đầu trang chứa logo và giới thiệu ngắn -->
-		<header>
-			<img src="/logo.png" alt="Hình có chiều rộng 150px" width="150px" alt="Hình có chiều cao 150px" height="150px">
-			<p><b>Chú ý:</b> Quán đóng cửa vào mỗi dịp mùng 1 và 15 âm lịch hàng tháng!</p>
-		</header>
-		<div class="container">
-			<!-- Phần giới thiệu -->
-			<div class="intro">
-				<p>Chào mừng bạn đến với website đặt món online của quán bún chả cá Má Hai – nơi thưởng thức bún chả cá ngon chuẩn vị, cùng nhiều món ăn đặc sản hấp dẫn. Đặt món ngay để trải nghiệm hương vị đậm đà khó quên!</p>
-			</div>
-			<!-- Thanh tìm kiếm món ăn -->
-			<div class="search-bar">
-				<center><input type="text" id="foodSearch" placeholder="Tìm kiếm món ăn tại đây..." style="width: 70%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px;"></center>
-			</div>
-			<!-- Nút Back to Top -->
-			<button id="backToTop">↑</button>
-			<!-- Danh mục món ăn -->
-			<div class="category-container">
-				<div class="category-item" data-category="all">
-					<img src="https://cdn4.iconfinder.com/data/icons/selection-cursors-1/24/Scroll-All_Direction_1-256.png" alt="Tất cả">
-					<span>Tất cả</span>
-				</div>
-				<div class="category-item" data-category="mon-chinh">
-					<img src="https://cdn2.iconfinder.com/data/icons/restaurant-outline-3/64/Course-food-main-plate-restaurant-512.png" alt="Món chính">
-					<span>Món Chính</span>
-				</div>
-				<div class="category-item" data-category="them-mon">
-					<img src="https://cdn3.iconfinder.com/data/icons/food-delivery-203/512/-_dish_food_cover_cloche_add_create_plus-512.png" alt="Thêm Món">
-					<span>Thêm Món</span>
-				</div>
-				<div class="category-item" data-category="do-uong">
-					<img src="https://cdn3.iconfinder.com/data/icons/coffee-related/64/coffee_paper_drink_cup_icon-512.png" alt="Đồ Uống">
-					<span>Đồ Uống</span>
-				</div>
-			</div>
-			
-			<form id="orderForm" action="https://docs.google.com/forms/d/e/1FAIpQLSda1imghgrIuG5Ugq9uVXSaEsXUTJVysc8e0GWR1He2j2fN9A/formResponse" method="POST">
-				<!-- Danh sách món ăn -->
-				<div class="food-grid">
-					<div class="food-item" data-category="mon-chinh">
-						<img src="https://daivietourist.vn/wp-content/uploads/2024/10/bun-cha-ca-da-nang-1.jpg" alt=" Cá">
-						<h3>Bún Chả Cá</h3>
-						<p>Bún chả cá – chả cá dai ngọt, nước dùng thanh, ăn kèm bún tươi và rau sống.</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-bunchaca">25.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-bunchaca">Số lượng:</label>
-							<input type="number" id="quantity-bunchaca" name="entry.1982277453" min="0" value="0">
-						</div>
-					</div>
-					<div class="food-item" data-category="mon-chinh">
-						<img src="https://quynhontourist.vn/wp-content/uploads/2023/01/bun-rieu-cha-ca-tai-09-ha-huy-tap.jpg" alt="Bún Chả">
-						<h3>Bún Chả Riêu</h3>
-						<p>Bún Chả Riêu – Bún mềm, nước riêu cua thanh ngọt, chả thơm béo, rau tươi giòn mát.</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-buncharieu">30.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-buncharieu">Số lượng:</label>
-							<input type="number" id="quantity-buncharieu" name="entry.2102199954" min="0" value="0">
-						</div>
-					</div>
-					<div class="food-item" data-category="them-mon">
-						<img src="https://i.ytimg.com/vi/ZLwCwyIDJJ4/hq720.jpg" alt="Chả Cá Riêng">
-						<h3>Chả cá riêng</h3>
-						<p>Hãy đặt chả cá riêng nếu bạn muốn ăn thêm chả cá. <br> (Giá bán: 20k/lạng)</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-chaca">20.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-chaca">Số lượng:</label>
-							<input type="number" id="quantity-chaca" name="entry.1820904143" min="0" value="0">
-						</div>
-					</div>
-					<div class="food-item" data-category="them-mon">
-						<img src="https://bom.so/EtDlBh" alt="Bún thêm">
-						<h3>Bún thêm</h3>
-						<p>Hãy đặt bún thêm nếu bạn cần ăn thêm bún.</p>
-						<div class="price-display">
-							<strong>Giá: </strong><span id="price-bunthem">5.000 VND</span>
-						</div>
-						<div class="quantity-selector">
-							<label for="quantity-bunthem">Số lượng:</label>
-							<input type="number" id="quantity-bunthem" name="entry.1278227499" min="0" value="0">
-						</div>
-					</div>
-				</div>
-				<div class="order-divider"></div>
-				<div class="order-summary">
-					<h2>
-						<i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>
-						Giỏ hàng của bạn
-					</h2>
-					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-					<table id="orderTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-						<thead>
-							<tr style="background-color: #f2f2f2;">
-								<th style="border: 1px solid #ddd; padding: 10px;">Sản phẩm</th>
-								<th style="border: 1px solid #ddd; padding: 10px;">Số lượng</th>
-								<th style="border: 1px solid #ddd; padding: 10px;">Giá (VND)</th>
-								<th style="border: 1px solid #ddd; padding: 10px;">Thành tiền (VND)</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Các dòng sản phẩm sẽ được thêm tự động -->
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="3" style="text-align: right; padding: 10px; font-weight: bold;">Tổng cộng:</td>
-								<td id="totalPrice" style="text-align: center; padding: 10px; font-weight: bold;">0 VND</td>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-				<div class="order-divider"></div>
-				<div class="order-type">
-					<h3>Chọn phương thức thanh toán:</h3>
-					<label>
-						<input type="radio" name="paymentMethod" value="Tiền mặt" required> Tiền mặt
-					</label>
-					<label>
-						<input type="radio" name="paymentMethod" value="Chuyển khoản" required> Chuyển khoản
-					</label>
-				</div>
-				<div class="qr-container" id="qrContainer">
-					<h3>Quét mã QR để thanh toán</h3>
-					<img id="qrCode" src="" alt="QR Code">
-				</div>
-								<div class="order-divider"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website đặt món ăn online của quán bún chả cá Má Hai – nơi thưởng thức bún chả cá ngon chuẩn vị, cùng nhiều món ăn đặc sản hấp dẫn.">
+    <title>Quán Bún Chả Cá Má Hai - Đặt Món Online</title>
 
-				<div class="shipping-info">
-    <h3>Thông tin giao hàng</h3>
-    <label>Họ và tên:</label>
-    <input type="text" name="entry.1034735075" required>
-    <label>Số điện thoại:</label>
-    <input type="tel" name="entry.1622871642" required>
-    <label>Địa chỉ:</label>
-    <textarea name="entry.1803535923" required></textarea>
-    <label>Ghi chú:</label>
-    <textarea name="entry.491142795"></textarea>
-</div>
-				<div class="order-divider"></div>
-				<button id="orderForm" type="submit" onclick="showPopup()" style="display: block; width: 100%; padding: 15px; background: #18A5A7; color: #fff; font-size: 1.2em; border: none; border-radius: 4px; cursor: pointer;">Đặt Món</button>
-				<form id="orderForm" action="your-server-endpoint" method="POST">
-				</form>
-		</div>
-<script src="script.js"></script>
-		<!-- Phần chân trang -->
-		<footer>
-			<p>&copy; 2025 website Quán Bún Chả Cá Má Hai - Tất cả các quyền được bảo lưu. <br> Developed by: Hoan IT</p>
-		</footer>
-	</body>
-	
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="/logo.png" alt="Logo Quán Má Hai" class="logo">
+            <h1>Quán Bún Chả Cá Má Hai</h1>
+            <p class="subtitle">Hương vị đậm đà, giao hàng tận nơi</p>
+        </div>
+        <div class="notice">
+            <p><b>Lưu ý:</b> Quán nghỉ vào ngày mùng 1 và 15 Âm lịch hàng tháng!</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Chào mừng quý khách!</h2>
+            <p>Thưởng thức bún chả cá chuẩn vị cùng nhiều món ăn đặc sản hấp dẫn ngay tại nhà. Đặt món ngay để trải nghiệm hương vị khó quên!</p>
+        </section>
+
+        <section class="menu-selection">
+            <div class="search-bar">
+                <input type="text" id="foodSearch" placeholder="Tìm kiếm món ăn...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="category-container">
+                <div class="category-item active" data-category="all">
+                    <img src="https://cdn4.iconfinder.com/data/icons/selection-cursors-1/24/Scroll-All_Direction_1-256.png" alt="Tất cả">
+                    <span>Tất cả</span>
+                </div>
+                <div class="category-item" data-category="mon-chinh">
+                    <img src="https://cdn2.iconfinder.com/data/icons/restaurant-outline-3/64/Course-food-main-plate-restaurant-512.png" alt="Món chính">
+                    <span>Món Chính</span>
+                </div>
+                <div class="category-item" data-category="them-mon">
+                    <img src="https://cdn3.iconfinder.com/data/icons/food-delivery-203/512/-_dish_food_cover_cloche_add_create_plus-512.png" alt="Món thêm">
+                    <span>Món Thêm</span>
+                </div>
+                <div class="category-item" data-category="do-uong">
+                    <img src="https://cdn3.iconfinder.com/data/icons/coffee-related/64/coffee_paper_drink_cup_icon-512.png" alt="Đồ uống">
+                    <span>Đồ Uống</span>
+                </div>
+            </div>
+        </section>
+
+        <form id="orderForm" action="https://docs.google.com/forms/d/e/1FAIpQLSda1imghgrIuG5Ugq9uVXSaEsXUTJVysc8e0GWR1He2j2fN9A/formResponse" method="POST" target="_blank">
+            <section class="food-grid">
+                <div class="food-item" data-category="mon-chinh">
+                    <img src="https://daivietourist.vn/wp-content/uploads/2024/10/bun-cha-ca-da-nang-1.jpg" alt="Bún Chả Cá">
+                    <h3>Bún Chả Cá</h3>
+                    <p>Chả cá dai ngọt, nước dùng thanh, ăn kèm bún tươi và rau sống.</p>
+                    <div class="price-display">20.000 VND</div>
+                    <div class="quantity-selector">
+                        <label for="quantity-bunchaca">Số lượng:</label>
+                        <input type="number" id="quantity-bunchaca" name="entry.1982277453" min="0" value="0">
+                    </div>
+                </div>
+                <div class="food-item" data-category="mon-chinh">
+                    <img src="https://quynhontourist.vn/wp-content/uploads/2023/01/bun-rieu-cha-ca-tai-09-ha-huy-tap.jpg" alt="Bún Chả Riêu">
+                    <h3>Bún Chả Riêu</h3>
+                    <p>Bún mềm, nước riêu cua thanh ngọt, chả thơm béo, rau tươi giòn mát.</p>
+                    <div class="price-display">25.000 VND</div>
+                    <div class="quantity-selector">
+                        <label for="quantity-buncharieu">Số lượng:</label>
+                        <input type="number" id="quantity-buncharieu" name="entry.2102199954" min="0" value="0">
+                    </div>
+                </div>
+                <div class="food-item" data-category="them-mon">
+                    <img src="https://i.ytimg.com/vi/ZLwCwyIDJJ4/hq720.jpg" alt="Chả Cá Riêng">
+                    <h3>Chả cá riêng</h3>
+                    <p>Đặt thêm chả cá nếu bạn muốn. (Giá bán: 20k/lạng)</p>
+                    <div class="price-display">20.000 VND</div>
+                    <div class="quantity-selector">
+                        <label for="quantity-chaca">Số lượng:</label>
+                        <input type="number" id="quantity-chaca" name="entry.1820904143" min="0" value="0">
+                    </div>
+                </div>
+                <div class="food-item" data-category="them-mon">
+                    <img src="https://bom.so/EtDlBh" alt="Bún thêm">
+                    <h3>Bún thêm</h3>
+                    <p>Đặt thêm bún nếu bạn cần ăn thêm.</p>
+                    <div class="price-display">5.000 VND</div>
+                    <div class="quantity-selector">
+                        <label for="quantity-bunthem">Số lượng:</label>
+                        <input type="number" id="quantity-bunthem" name="entry.1278227499" min="0" value="0">
+                    </div>
+                </div>
+            </section>
+
+            <div class="order-divider"></div>
+
+            <section class="order-summary">
+                <h2><i class="fas fa-shopping-cart"></i> Giỏ hàng của bạn</h2>
+                <p id="orderIdDisplay"></p>
+                <table id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Tổng cộng:</td>
+                            <td id="totalPrice">0 VND</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+
+            <div class="order-divider"></div>
+
+            <section class="customer-info">
+                <div class="shipping-info">
+                    <h3>Thông tin giao hàng</h3>
+                    <label for="customerName">Họ và tên:</label>
+                    <input type="text" id="customerName" name="entry.1034735075" required>
+                    <label for="customerPhone">Số điện thoại:</label>
+                    <input type="tel" id="customerPhone" name="entry.1622871642" required>
+                    <label for="customerAddress">Địa chỉ:</label>
+                    <textarea id="customerAddress" name="entry.1803535923" required></textarea>
+                    <label for="customerNote">Ghi chú:</label>
+                    <textarea id="customerNote" name="entry.491142795"></textarea>
+                </div>
+
+                <div class="payment-info">
+                    <h3>Phương thức thanh toán</h3>
+                    <div class="payment-options">
+                        <label>
+                            <input type="radio" name="entry.2129779347" value="Tiền mặt" required>
+                            <i class="fas fa-money-bill-wave"></i> Tiền mặt
+                        </label>
+                        <label>
+                            <input type="radio" name="entry.2129779347" value="Chuyển khoản">
+                            <i class="fas fa-credit-card"></i> Chuyển khoản
+                        </label>
+                    </div>
+                    <div class="qr-container" id="qrContainer">
+                        <p>Quét mã QR để thanh toán qua VietQR</p>
+                        <img id="qrCode" src="" alt="QR Code Thanh toán">
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" class="submit-button">
+                <i class="fas fa-paper-plane"></i> Đặt Món Ngay
+            </button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Quán Bún Chả Cá Má Hai - All rights reserved.</p>
+        <p>Developed by: Hoan IT</p>
+    </footer>
+
+    <button id="backToTop" title="Lên đầu trang">↑</button>
+
+    <div id="popupOverlay" class="popup-overlay">
+        <div id="orderSuccessPopup" class="popup">
+            <i class="fas fa-check-circle popup-icon"></i>
+            <h2>Đặt hàng thành công!</h2>
+            <p>Cảm ơn bạn đã đặt món. Đơn hàng sẽ được giao đến trong thời gian sớm nhất.</p>
+            <button onclick="closePopup()">Tuyệt vời!</button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
 </html>
-
-
-
-
-
