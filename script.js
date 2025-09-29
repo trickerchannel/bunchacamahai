@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
         'quantity-bunchaca': { price: 25000, name: 'Bún Chả Cá' },
         'quantity-buncharieu': { price: 30000, name: 'Bún Chả Riêu' },
         'quantity-chaca': { price: 20000, name: 'Chả cá riêng' },
-        'quantity-bunthem': { price: 5000, name: 'Bún thêm' }
+        'quantity-bunthem': { price: 5000, name: 'Bún thêm' },
+        'quantity-huda': { price: 25000, name: 'Bia Huda' },
+        'quantity-coca': { price: 20000, name: 'Cocacola' }
     };
 
     // --- CÁC HÀM XỬ LÝ ---
