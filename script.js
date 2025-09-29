@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // --- ELEMENTS ---
+    // --- TĂNG CƯỜNG BẢO MẬT ---
+
+    // Chống F12, Ctrl+U, Ctrl+Shift+J
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'F12' || 
+            (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+            (e.ctrlKey && e.key === 'U')) {
+            e.preventDefault();
+            alert("Chức năng này đã bị vô hiệu hóa.");
+        }
+    });
+    
+    // Chống gỡ lỗi (debugger)
+    function checkDebugger() {
+        const startTime = new Date().getTime();
+        debugger;
+        const endTime = new Date().getTime();
+        if (endTime - startTime > 100) {
+            alert("Phát hiện công cụ gỡ lỗi. Vui lòng đóng lại.");
+            // Tùy chọn: Chuyển hướng hoặc chặn nội dung
+            // window.location.href = "about:blank"; 
+        }
+    }
+
+    // Chạy kiểm tra gỡ lỗi định kỳ
+    // setInterval(checkDebugger, 1000); // Bỏ ghi chú để bật kiểm tra định kỳ
+
+    // --- CÁC THÀNH PHẦN GIAO DIỆN (ELEMENTS) ---
     const orderForm = document.getElementById('orderForm');
     const foodItems = document.querySelectorAll('.food-item');
     const quantityInputs = document.querySelectorAll('.quantity-selector input');
@@ -8,8 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToTopButton = document.getElementById('backToTop');
     const qrContainer = document.getElementById('qrContainer');
     const paymentRadios = document.querySelectorAll('input[name="entry.2129779347"]');
+    const customerNameInput = document.getElementById('customerName');
+    const customerPhoneInput = document.getElementById('customerPhone');
+    const customerAddressInput = document.getElementById('customerAddress');
 
-    // --- DATA ---
+
+    // --- DỮ LIỆU SẢN PHẨM ---
     const productData = {
         'quantity-bunchaca': { price: 25000, name: 'Bún Chả Cá' },
         'quantity-buncharieu': { price: 30000, name: 'Bún Chả Riêu' },
@@ -17,18 +48,52 @@ document.addEventListener('DOMContentLoaded', function () {
         'quantity-bunthem': { price: 5000, name: 'Bún thêm' }
     };
 
-    // --- FUNCTIONS ---
+    // --- CÁC HÀM XỬ LÝ ---
+    
     /**
-     * Formats a number as Vietnamese currency.
-     * @param {number} number - The number to format.
-     * @returns {string} - The formatted currency string.
+     * Tạo và hiển thị thông báo lỗi cho một trường nhập liệu.
+     * @param {HTMLElement} element - Trường nhập liệu cần hiển thị lỗi.
+     * @param {string} message - Thông báo lỗi cần hiển thị.
+     */
+    function showError(element, message) {
+        // Sử dụng parentNode để đảm bảo hoạt động đúng với textarea
+        const parent = element.parentNode;
+        let error = parent.querySelector('.error-message');
+        if (!error) {
+            error = document.createElement('span');
+            error.className = 'error-message';
+            error.style.color = 'red';
+            error.style.fontSize = '0.9em';
+            // Chèn lỗi sau thẻ input/textarea
+            parent.insertBefore(error, element.nextSibling);
+        }
+        error.textContent = message;
+    }
+
+    /**
+     * Xóa thông báo lỗi của một trường nhập liệu.
+     * @param {HTMLElement} element - Trường nhập liệu cần xóa lỗi.
+     */
+    function clearError(element) {
+        const parent = element.parentNode;
+        let error = parent.querySelector('.error-message');
+        if (error) {
+            error.textContent = '';
+        }
+    }
+
+
+    /**
+     * Định dạng một số thành đơn vị tiền tệ Việt Nam.
+     * @param {number} number - Con số cần định dạng.
+     * @returns {string} - Chuỗi tiền tệ đã được định dạng.
      */
     function formatCurrency(number) {
         return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 
     /**
-     * Updates the order summary table based on current quantities.
+     * Cập nhật bảng tóm tắt đơn hàng dựa trên số lượng hiện tại.
      */
     function updateOrderSummary() {
         const orderTableBody = document.querySelector('#orderTable tbody');
@@ -58,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Generates a random 6-character order ID.
-     * @returns {string} - The generated order ID.
+     * Tạo một mã đơn hàng ngẫu nhiên gồm 6 ký tự.
+     * @returns {string} - Mã đơn hàng đã tạo.
      */
     function generateOrderId() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -73,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const orderId = generateOrderId();
 
     /**
-     * Updates the VietQR code image based on the total amount.
-     * @param {number} totalAmount - The total order amount.
+     * Cập nhật hình ảnh mã VietQR dựa trên tổng số tiền.
+     * @param {number} totalAmount - Tổng tiền của đơn hàng.
      */
     function updateQRCode(totalAmount) {
         if (totalAmount > 0 && document.querySelector('input[name="entry.2129779347"][value="Chuyển khoản"]').checked) {
@@ -93,16 +158,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Removes diacritics from a Vietnamese string for searching.
-     * @param {string} str - The string to normalize.
-     * @returns {string} - The normalized string.
+     * Loại bỏ dấu tiếng Việt khỏi một chuỗi để tìm kiếm.
+     * @param {string} str - Chuỗi cần chuẩn hóa.
+     * @returns {string} - Chuỗi đã được chuẩn hóa.
      */
     function removeVietnameseTones(str) {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
     }
 
     /**
-     * Filters food items based on the search term.
+     * Lọc các món ăn dựa trên từ khóa tìm kiếm.
      */
     function filterFoodItems() {
         const searchTerm = removeVietnameseTones(foodSearch.value.trim().toLowerCase());
@@ -117,8 +182,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Filters food items based on the selected category.
-     * @param {string} selectedCategory - The category to display.
+     * Lọc các món ăn dựa trên danh mục đã chọn.
+     * @param {string} selectedCategory - Danh mục cần hiển thị.
      */
     function filterByCategory(selectedCategory) {
         foodItems.forEach(item => {
@@ -132,14 +197,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     /**
-     * Displays the order success popup.
+     * Hiển thị popup thông báo đặt hàng thành công.
      */
     function showPopup() {
         document.getElementById('popupOverlay').style.display = 'flex';
     }
 
     /**
-     * Closes the order success popup and reloads the page.
+     * Đóng popup và tải lại trang.
      */
     window.closePopup = function() {
         document.getElementById('popupOverlay').style.display = 'none';
@@ -147,50 +212,119 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
 
-    // --- EVENT LISTENERS ---
+    // --- CÁC BỘ LẮNG NGHE SỰ KIỆN ---
 
-    // Update summary when quantity changes
+    // Xác thực ô nhập số lượng chỉ cho phép nhập số
     quantityInputs.forEach(input => {
-        input.addEventListener('input', updateOrderSummary);
+        input.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            updateOrderSummary();
+        });
     });
 
-    // Handle form submission
-    orderForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // Always prevent default submission first
+    // Xác thực tên khách hàng chỉ cho phép nhập chữ
+    customerNameInput.addEventListener('input', function() {
+        if (/\d/.test(this.value)) {
+            showError(this, "Họ và tên không được chứa số.");
+            this.value = this.value.replace(/[0-9]/g, '');
+        } else {
+            clearError(this);
+        }
+    });
 
-        // 1. Validate cart is not empty
+    // Xác thực số điện thoại chỉ cho phép nhập số và tối đa 10 chữ số
+    customerPhoneInput.addEventListener('input', function() {
+        const originalValue = this.value;
+        const numericValue = originalValue.replace(/[^0-9]/g, '');
+
+        if (originalValue !== numericValue) {
+             showError(this, "Số điện thoại chỉ được nhập số.");
+        } else if (numericValue.length > 10) {
+             showError(this, "Số điện thoại không được quá 10 số.");
+        }
+        else {
+            clearError(this);
+        }
+        
+        // Ép buộc độ dài tối đa
+        this.value = numericValue.slice(0, 10); 
+    });
+    
+    // Xác thực địa chỉ phải chứa cả chữ và số
+    customerAddressInput.addEventListener('input', function() {
+        const value = this.value.trim();
+        const hasLetter = /[a-zA-Z]/.test(value);
+        const hasNumber = /\d/.test(value);
+
+        if (value && (!hasLetter || !hasNumber)) {
+            showError(this, "Định dạng địa chỉ không hợp lệ, địa chỉ phải bao gồm số nhà và tên đường.");
+        } else {
+            clearError(this);
+        }
+    });
+
+    // Xử lý việc gửi form
+    orderForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Luôn chặn hành vi mặc định của form
+
+        // 1. Xác thực giỏ hàng không được trống
         const totalQuantity = Array.from(quantityInputs).reduce((sum, input) => sum + (parseInt(input.value, 10) || 0), 0);
         if (totalQuantity === 0) {
             alert("Giỏ hàng của bạn đang trống. Vui lòng chọn ít nhất một món ăn.");
             return;
         }
 
-        // 2. Validate shipping information
-        const name = document.getElementById('customerName').value.trim();
-        const phone = document.getElementById('customerPhone').value.trim();
-        const address = document.getElementById('customerAddress').value.trim();
+        // 2. Xác thực thông tin giao hàng
+        const name = customerNameInput.value.trim();
+        const phone = customerPhoneInput.value.trim();
+        const address = customerAddressInput.value.trim();
         if (!name || !phone || !address) {
             alert("Vui lòng điền đầy đủ Họ tên, Số điện thoại và Địa chỉ.");
             return;
         }
+        
+        // Kiểm tra bổ sung cho các ký tự không hợp lệ phòng trường hợp người dùng copy-paste
+        if (/\d/.test(name)) {
+            alert("Họ và tên không hợp lệ.");
+            showError(customerNameInput, "Họ và tên không được chứa số.");
+            return;
+        }
+        
+        if (/[^0-9]/.test(phone)) {
+            alert("Số điện thoại không hợp lệ.");
+             showError(customerPhoneInput, "Số điện thoại chỉ được nhập số.");
+            return;
+        }
 
-        // 3. Validate payment method selection
+        // Xác thực lại địa chỉ khi gửi form
+        const hasLetter = /[a-zA-Z]/.test(address);
+        const hasNumber = /\d/.test(address);
+        if (!hasLetter || !hasNumber) {
+            alert("Địa chỉ không hợp lệ. Vui lòng kiểm tra lại.");
+            showError(customerAddressInput, "Định dạng địa chỉ không hợp lệ, phải có cả chữ và số.");
+            return;
+        }
+
+
+        // 3. Xác thực phương thức thanh toán đã được chọn
         const selectedPaymentMethod = document.querySelector('input[name="entry.2129779347"]:checked');
         if (!selectedPaymentMethod) {
             alert("Vui lòng chọn phương thức thanh toán.");
             return;
         }
 
-        // If all validations pass, show success popup and submit the form.
+        // Nếu tất cả xác thực đều hợp lệ, hiển thị popup và gửi form
         showPopup();
         
-        // Timeout allows the user to see the popup before the form submits in the background.
+        // Thời gian chờ cho phép người dùng thấy popup trước khi form thực sự được gửi đi
         setTimeout(() => {
+             // Trong kịch bản thực tế, bạn có thể dùng AJAX để tránh mở tab mới
+             // Với form này, chúng ta gửi đi như hiện tại.
              orderForm.submit();
         }, 500);
     });
 
-    // Handle category filtering
+    // Xử lý lọc theo danh mục
     categoryItems.forEach(item => {
         item.addEventListener('click', function () {
             categoryItems.forEach(i => i.classList.remove('active'));
@@ -200,15 +334,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Handle search input
+    // Xử lý ô tìm kiếm
     foodSearch.addEventListener('input', filterFoodItems);
 
-    // Show/hide QR code based on payment method
+    // Hiện/ẩn mã QR dựa trên phương thức thanh toán
     paymentRadios.forEach(radio => {
         radio.addEventListener('change', updateOrderSummary);
     });
 
-    // Back to top button visibility and functionality
+    // Hiển thị và chức năng của nút quay lại đầu trang
     window.addEventListener('scroll', function () {
         if (window.scrollY > 300) {
             backToTopButton.style.display = 'flex';
@@ -220,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // --- INITIALIZATION ---
+    // --- KHỞI TẠO ---
     document.getElementById('orderIdDisplay').textContent = `Mã đơn hàng: #${orderId}`;
     updateOrderSummary();
 });
