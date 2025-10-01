@@ -213,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function () {
         location.reload();
     };
 
-
     // --- CÁC BỘ LẮNG NGHE SỰ KIỆN ---
 
     // Xác thực ô nhập số lượng chỉ cho phép nhập số
@@ -224,11 +223,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Xác thực tên khách hàng chỉ cho phép nhập chữ
+    // Xác thực tên khách hàng (không chứa số và ký tự đặc biệt)
     customerNameInput.addEventListener('input', function() {
-        if (/\d/.test(this.value)) {
-            showError(this, "Họ và tên không được chứa số.");
-            this.value = this.value.replace(/[0-9]/g, '');
+        const invalidChars = /[\d!@#$%^&*()]/g;
+        const originalValue = this.value;
+        const sanitizedValue = originalValue.replace(invalidChars, '');
+
+        if (originalValue !== sanitizedValue) {
+            showError(this, "Họ và tên không được chứa số hoặc ký tự đặc biệt.");
+            this.value = sanitizedValue;
         } else {
             clearError(this);
         }
@@ -252,16 +255,27 @@ document.addEventListener('DOMContentLoaded', function () {
         this.value = numericValue.slice(0, 10); 
     });
     
-    // Xác thực địa chỉ phải chứa cả chữ và số
+    // Xác thực địa chỉ (không chứa ký tự đặc biệt và phải có chữ + số)
     customerAddressInput.addEventListener('input', function() {
-        const value = this.value.trim();
+        const invalidSpecialChars = /[!@#$%^&*()]/g;
+        let value = this.value;
+        
+        // 1. Loại bỏ ký tự đặc biệt
+        if (invalidSpecialChars.test(value)) {
+            value = value.replace(invalidSpecialChars, '');
+            this.value = value;
+            showError(this, "Địa chỉ không được chứa các ký tự đặc biệt: !@#$%^&*()");
+            return; // Dừng lại sau khi hiển thị lỗi này
+        }
+
+        // 2. Kiểm tra phải có cả chữ và số
         const hasLetter = /[a-zA-Z]/.test(value);
         const hasNumber = /\d/.test(value);
 
-        if (value && (!hasLetter || !hasNumber)) {
-            showError(this, "Định dạng địa chỉ không hợp lệ, địa chỉ phải bao gồm số nhà và tên đường.");
+        if (value.trim() && (!hasLetter || !hasNumber)) {
+            showError(this, "Địa chỉ phải bao gồm số nhà và tên đường.");
         } else {
-            clearError(this);
+            clearError(this); // Xóa lỗi nếu cả hai điều kiện đều ổn
         }
     });
 
@@ -286,9 +300,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
         // Kiểm tra bổ sung cho các ký tự không hợp lệ phòng trường hợp người dùng copy-paste
-        if (/\d/.test(name)) {
+        if (/[\d!@#$%^&*()]/.test(name)) {
             alert("Họ và tên không hợp lệ.");
-            showError(customerNameInput, "Họ và tên không được chứa số.");
+            showError(customerNameInput, "Họ và tên không được chứa số hoặc ký tự đặc biệt.");
             return;
         }
         
@@ -301,9 +315,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Xác thực lại địa chỉ khi gửi form
         const hasLetter = /[a-zA-Z]/.test(address);
         const hasNumber = /\d/.test(address);
-        if (!hasLetter || !hasNumber) {
+        if (!hasLetter || !hasNumber || /[!@#$%^&*()]/.test(address)) {
             alert("Địa chỉ không hợp lệ. Vui lòng kiểm tra lại.");
-            showError(customerAddressInput, "Định dạng địa chỉ không hợp lệ, phải có cả chữ và số.");
+            showError(customerAddressInput, "Địa chỉ không hợp lệ, phải có cả chữ và số, không chứa ký tự đặc biệt.");
             return;
         }
 
