@@ -169,28 +169,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Lọc các món ăn dựa trên từ khóa tìm kiếm.
+     * [FIXED] Lọc các món ăn dựa trên TỪ KHÓA TÌM KIẾM và DANH MỤC đang chọn.
      */
-    function filterFoodItems() {
+    function applyFilters() {
         const searchTerm = removeVietnameseTones(foodSearch.value.trim().toLowerCase());
+        const activeCategory = document.querySelector('.category-item.active').getAttribute('data-category');
+
         foodItems.forEach(item => {
             const foodName = removeVietnameseTones(item.querySelector('h3').textContent.trim().toLowerCase());
-            if (foodName.includes(searchTerm)) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    /**
-     * Lọc các món ăn dựa trên danh mục đã chọn.
-     * @param {string} selectedCategory - Danh mục cần hiển thị.
-     */
-    function filterByCategory(selectedCategory) {
-        foodItems.forEach(item => {
             const itemCategory = item.getAttribute('data-category');
-            if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+
+            const categoryMatch = (activeCategory === 'all' || itemCategory === activeCategory);
+            const searchMatch = foodName.includes(searchTerm);
+
+            if (categoryMatch && searchMatch) {
                 item.style.display = 'flex';
             } else {
                 item.style.display = 'none';
@@ -300,9 +292,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
         // Kiểm tra bổ sung cho các ký tự không hợp lệ phòng trường hợp người dùng copy-paste
-        if (/[\d!@#$%^&*()]/.test(name)) {
+        if (/\d/.test(name)) {
             alert("Họ và tên không hợp lệ.");
-            showError(customerNameInput, "Họ và tên không được chứa số hoặc ký tự đặc biệt.");
+            showError(customerNameInput, "Họ và tên không được chứa số.");
             return;
         }
         
@@ -315,9 +307,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Xác thực lại địa chỉ khi gửi form
         const hasLetter = /[a-zA-Z]/.test(address);
         const hasNumber = /\d/.test(address);
-        if (!hasLetter || !hasNumber || /[!@#$%^&*()]/.test(address)) {
+        if (!hasLetter || !hasNumber) {
             alert("Địa chỉ không hợp lệ. Vui lòng kiểm tra lại.");
-            showError(customerAddressInput, "Địa chỉ không hợp lệ, phải có cả chữ và số, không chứa ký tự đặc biệt.");
+            showError(customerAddressInput, "Định dạng địa chỉ không hợp lệ, phải có cả chữ và số.");
             return;
         }
 
@@ -340,18 +332,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 500);
     });
 
-    // Xử lý lọc theo danh mục
+    // [FIXED] Xử lý lọc theo danh mục
     categoryItems.forEach(item => {
         item.addEventListener('click', function () {
             categoryItems.forEach(i => i.classList.remove('active'));
             this.classList.add('active');
-            const selectedCategory = this.getAttribute('data-category');
-            filterByCategory(selectedCategory);
+            applyFilters();
         });
     });
 
-    // Xử lý ô tìm kiếm
-    foodSearch.addEventListener('input', filterFoodItems);
+    // [FIXED] Xử lý ô tìm kiếm khi nhập liệu
+    foodSearch.addEventListener('input', applyFilters);
+
+    // [NEW] Xử lý ô tìm kiếm khi nhấn Enter
+    foodSearch.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Ngăn hành vi mặc định (ví dụ: submit form)
+            applyFilters();
+        }
+    });
 
     // Hiện/ẩn mã QR dựa trên phương thức thanh toán
     paymentRadios.forEach(radio => {
